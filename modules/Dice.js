@@ -1,10 +1,10 @@
 const typeBackgroundUrl = {
-  4: 'url(../assets/dice/d4.png)',
-  6: 'url(../assets/dice/d6.png)',
-  8: 'url(../assets/dice/d8.png)',
-  10: 'url(../assets/dice/d10.png)',
-  12: 'url(../assets/dice/d12.png)',
-  20: 'url(../assets/dice/d20.png)',
+  4: 'url(./assets/dice/d4.png)',
+  6: 'url(./assets/dice/d6.png)',
+  8: 'url(./assets/dice/d8.png)',
+  10: 'url(./assets/dice/d10.png)',
+  12: 'url(./assets/dice/d12.png)',
+  20: 'url(./assets/dice/d20.png)',
 }
 
 // Dice class
