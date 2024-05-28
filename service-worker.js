@@ -7,17 +7,17 @@ self.addEventListener('install', event => {
       return cache.addAll([
         // Add your static assets here
         '/',
-        '/index.html',
-        '/modules/Dice.js',
-        '/modules/Roll.js',
-        '/modules/Game.js',
-        '/assets/dice/d4.png',
-        '/assets/dice/d6.png',
-        '/assets/dice/d8.png',
-        '/assets/dice/d10.png',
-        '/assets/dice/d12.png',
-        '/assets/dice/d20.png',
-        '/start.js'
+        './index.html',
+        './modules/Dice.js',
+        './modules/Roll.js',
+        './modules/Game.js',
+        './assets/dice/d4.png',
+        './assets/dice/d6.png',
+        './assets/dice/d8.png',
+        './assets/dice/d10.png',
+        './assets/dice/d12.png',
+        './assets/dice/d20.png',
+        './start.js'
       ]);
     })
   );
