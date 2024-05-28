@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fortress explorer</title>
+    <style>
+        body { 
+          margin: 0;
+          width: 99vw;
+          height: 99vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: black;
+        }
+        .line{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .column{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .total{
+          color: white;
+          font-size: 2em;
+          margin: 0.1em 0.5em;
+        }
+        .dice{
+          background-size: contain;
+          width: 2em;
+          height: 2em;
+          margin: 0.1em;
+          border: 1px solid white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: grey;
+          font-size: 2.5em;
+          font-weight: bold;
+        }
+        .stopped{
+          background-color: grey;
+        }
+        .margin{
+          margin: 0.5em;
+        }
+        button{
+          background-color: white;
+          color: black;
+          padding: 1em 2em;
+          border: none;
+          cursor: pointer;
+        }
+        button:hover{
+          background-color: grey;
+          color: white;
+        }
+        button:active{
+          background-color: black;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+  <div id="game"></div>
+  <script type="module" src="start.js"></script>
+</body>
+</html>
