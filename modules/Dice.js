@@ -22,7 +22,16 @@ export class Dice {
     this.element.classList.add('dice');
     this.element.style.backgroundImage = typeBackgroundUrl[this.type];
     this.element.innerHTML = "?";
+    this.element.onclick = (e) => {
+      if(!this.stopped || this.value === 0) return;
+      //cancel the event to avoid the rollLine to be triggered
+      e.stopPropagation();
+      this.reset()
+
+    };
   }
+
+
 
   roll(time = 3000) {
     this.stopped = false;
