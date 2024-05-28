@@ -15,13 +15,20 @@ export class Roll {
     this.diceLine.onclick = () => this.roll();
     this.rollLine.appendChild(this.diceLine);
 
+    this.flatLine = document.createElement('div');
+    this.flatLine.classList.add('line');
+    this.flatLine.textContent = '';
+    this.flatLine.classList.add('flat');
+    this.flatLine.onclick = () => this.roll();
+    this.rollLine.appendChild(this.flatLine);
+
     this.rollControls = document.createElement('div');
     this.rollControls.classList.add('column');
     this.rollLine.appendChild(this.rollControls);
 
     this.total = document.createElement('div');
     this.total.classList.add('total');
-    this.total.textContent = 'Total: 0 + ??';
+    this.total.textContent = '--';
     this.rollControls.appendChild(this.total);
 
     this.resetButton = document.createElement('button');
@@ -60,8 +67,52 @@ export class Roll {
     }
     this.addDiceControls.appendChild(removeButton);
 
+    this.addFlatControls = document.createElement('div');
+    this.addFlatControls.classList.add('column');
+    this.addControls.appendChild(this.addFlatControls);
+
+    this.positiveFlatControls = document.createElement('div');
+    this.positiveFlatControls.classList.add('line');
+    this.addFlatControls.appendChild(this.positiveFlatControls);
+
+    //controls to add a flat bonus from 1 to 10
+    for (let i = 1; i <= 10; i++) {
+      const button = document.createElement('button');
+      button.textContent = `+${i}`;
+      button.classList.add('add');
+      button.onclick = () => this.addFlatBonus(i);
+      this.positiveFlatControls.appendChild(button);
+    }
+
+    this.negativeFlatControls = document.createElement('div');
+    this.negativeFlatControls.classList.add('line');
+    this.addFlatControls.appendChild(this.negativeFlatControls);
+
+    //controls to add a flat bonus from -1 to -10
+    for (let i = 1; i <= 10; i++) {
+      const button = document.createElement('button');
+      button.textContent = `-${i}`;
+      button.classList.add('add');
+      button.onclick = () => this.addFlatBonus(-i);
+      this.negativeFlatControls.appendChild(button);
+    }
+
+    //controls to remove a flat bonus
+    const removeFlatButton = document.createElement('button');
+    removeFlatButton.textContent = 'Remove';
+    removeFlatButton.classList.add('remove');
+    removeFlatButton.classList.add('margin');
+    removeFlatButton.onclick = () => {
+      const index = this.flatBonus.length - 1;
+      this.removeFlatBonus(index);
+    }
+    this.addFlatControls.appendChild(removeFlatButton);
+
+    
+
     this.lastTick = 0;
     this.dices = [];
+    this.flatBonus = [];
   }
 
   //Add a new dice to the roll
@@ -82,8 +133,26 @@ export class Roll {
     }
   }
 
+  addFlatBonus(value) {
+    this.flatBonus.push(value);
+    this.updateFlatLine();
+    this.updateTotal();
+  }
+
+  removeFlatBonus(index) {
+    this.flatBonus.splice(index, 1);
+    this.updateFlatLine();
+    this.updateTotal();
+  }
+
+  updateFlatLine() {
+    this.flatLine.textContent = this.flatBonus.map(bonus=> bonus>0 ? `+${bonus}` : `${bonus}`).join(' ');
+  }
+
   //Roll all the dices in the roll
   roll(time = 3000) {
+    if(this.stopped === false) return;
+
     this.time = time;
     this.lastTick = 0;
 
@@ -95,16 +164,25 @@ export class Roll {
 
   //Update the total value of the roll
   updateTotal() {
-    let total = 0;
+    let diceTotal = 0;
     let hasUnrolled = false;
     for (const dice of this.dices) {
       if (dice.value === 0 || !dice.stopped) {
         hasUnrolled = true;
+        break;
       }else{
-        total += dice.value;
+        diceTotal += dice.value;
       }
     }
-    this.total.textContent = `Total: ${total} ${hasUnrolled ? ' + ??' : ''}`;
+
+    const diceTotalText = hasUnrolled ? `??` : `${diceTotal}`;
+
+    let flatTotal = 0;
+    for (const bonus of this.flatBonus) {
+      flatTotal += bonus;
+    }
+
+    this.total.textContent = `${diceTotalText} + ${flatTotal} = ${hasUnrolled ? `??` : diceTotal + flatTotal}`;
   }
 
   //reset all the dices in the roll
