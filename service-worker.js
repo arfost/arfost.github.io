@@ -6,7 +6,6 @@ self.addEventListener('install', event => {
     caches.open('ADR-v1').then(cache => {
       return cache.addAll([
         // Add your static assets here
-        '/',
         './index.html',
         './modules/Dice.js',
         './modules/Roll.js',
