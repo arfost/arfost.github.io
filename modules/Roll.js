@@ -182,7 +182,7 @@ export class Roll {
       flatTotal += bonus;
     }
 
-    this.total.textContent = `${diceTotalText} + ${flatTotal} = ${hasUnrolled ? `??` : diceTotal + flatTotal}`;
+    this.total.textContent = `${diceTotalText}(${this.dices.length}) + ${flatTotal} = ${hasUnrolled ? `??` : diceTotal + flatTotal}`;
   }
 
   //reset all the dices in the roll
