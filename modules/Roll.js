@@ -22,20 +22,37 @@ export class Roll {
     this.flatLine.onclick = () => this.roll();
     this.rollLine.appendChild(this.flatLine);
 
-    this.rollControls = document.createElement('div');
-    this.rollControls.classList.add('column');
-    this.rollLine.appendChild(this.rollControls);
+    this.rollInfos = document.createElement('div');
+    this.rollInfos.classList.add('column');
+    this.rollLine.appendChild(this.rollInfos);
 
     this.total = document.createElement('div');
     this.total.classList.add('total');
     this.total.textContent = '--';
-    this.rollControls.appendChild(this.total);
+    this.rollInfos.appendChild(this.total);
+
+    this.rollControls = document.createElement('div');
+    this.rollControls.classList.add('line');
+    this.rollInfos.appendChild(this.rollControls);
 
     this.resetButton = document.createElement('button');
     this.resetButton.textContent = 'Reset';
     this.resetButton.onclick = () => this.reset();
     this.resetButton.classList.add('reset');
     this.rollControls.appendChild(this.resetButton);
+
+    //controls to clear all the dices and flat bonuses
+    const clearButton = document.createElement('button');
+    clearButton.textContent = 'Clear';
+    clearButton.onclick = () => {
+      this.dices = [];
+      this.flatBonus = [];
+      this.diceLine.innerHTML = "";
+      this.updateFlatLine();
+      this.updateTotal();
+    }
+    clearButton.classList.add('clear');
+    this.rollControls.appendChild(clearButton);
 
     
     this.addControls = document.createElement('div');
@@ -58,7 +75,7 @@ export class Roll {
 
     //controls to remove a dice
     const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
+    removeButton.textContent = 'Remove dice';
     removeButton.classList.add('remove');
     removeButton.classList.add('margin');
     removeButton.onclick = () => {
@@ -99,7 +116,7 @@ export class Roll {
 
     //controls to remove a flat bonus
     const removeFlatButton = document.createElement('button');
-    removeFlatButton.textContent = 'Remove';
+    removeFlatButton.textContent = 'Remove flat';
     removeFlatButton.classList.add('remove');
     removeFlatButton.classList.add('margin');
     removeFlatButton.onclick = () => {
