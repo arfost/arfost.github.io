@@ -18,10 +18,21 @@
       "type": "image/png"
     }
   ],
+  "screenshots": [
+    {
+      "src": "./assets/screenshots/screen1.png",
+      "sizes": "1300x500",
+      "type": "image/png"
+    },{
+      "src": "./assets/screenshots/screen2.png",
+      "sizes": "1300x500",
+      "type": "image/png"
+    }
+  ],
   "start_url": "index.html",
   "id": "arfost.diceRoller",
   "description": "A simple dice roller for JDR and such.",
-  "dir": "auto",
+  "dir": "ltr",
   "lang": "en",
   "display_override": [
     "fullscreen",
@@ -29,5 +40,6 @@
   ],
   "categories": [
     "games"
-  ]
+  ],
+  "prefer_related_applications": false
 }
